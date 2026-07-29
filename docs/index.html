@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ワーク2「示す」スライド案｜分科会B（校務利用 中級）</title>
+<style>
+:root{
+  --bg:#f5f9fb; --ink:#13242f; --sub:#5b7383; --line:#dce8ee;
+  --acc:#0797b9; --acc-deep:#04708c; --acc-pale:#ecf7fa; --ice:#7fd4e8;
+  --mint:#0ca678; --mint-pale:#e9f9f3; --coral:#e8604c; --coral-pale:#fdf0ed;
+  --sand:#b98a2f; --sand-pale:#fbf5e6; --night:#0c2330;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;
+  font-feature-settings:"palt";background:var(--night);color:var(--ink);
+  -webkit-font-smoothing:antialiased;overflow:hidden}
+.deck{position:relative;width:100vw;height:100vh}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;
+  background:linear-gradient(180deg,#f8fbfd 0%,#eef5f9 100%);
+  padding:clamp(24px,4vh,56px) clamp(28px,5vw,90px)}
+.slide.active{display:flex}
+.slide.dark{background:linear-gradient(150deg,#0c2330 0%,#0e3346 55%,#0d4a5e 100%);color:#f2fafc}
+
+.tag{display:flex;align-items:center;gap:14px;margin-bottom:clamp(10px,2vh,22px)}
+.tag .no{font-size:clamp(12px,1.4vw,15px);font-weight:900;letter-spacing:.18em;color:#fff;
+  background:var(--acc);border-radius:999px;padding:4px 18px}
+.tag .no.coral{background:var(--coral)} .tag .no.sand{background:var(--sand)} .tag .no.mint{background:var(--mint)}
+.tag .tm{font-size:clamp(12px,1.4vw,15px);font-weight:700;color:var(--sub);letter-spacing:.08em}
+.dark .tag .tm{color:var(--ice)}
+
+h1{font-size:clamp(30px,5.2vw,64px);font-weight:900;line-height:1.35;letter-spacing:.03em;margin-bottom:.35em}
+h2{font-size:clamp(22px,3.4vw,40px);font-weight:900;line-height:1.4;letter-spacing:.03em;margin-bottom:clamp(10px,2vh,20px)}
+.lead{font-size:clamp(15px,1.9vw,22px);color:var(--sub);line-height:1.9}
+.dark .lead{color:#bcdde8}
+.grow{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0}
+
+.q{font-size:clamp(24px,3.8vw,46px);font-weight:900;line-height:1.7;color:var(--acc-deep);
+  border-left:6px solid var(--acc);padding-left:.8em;margin:.6em 0}
+.dark .q{color:#fff;border-color:var(--ice)}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,28px);align-items:stretch}
+.card{background:#fff;border:1px solid var(--line);border-radius:16px;
+  padding:clamp(14px,2vh,26px) clamp(16px,2vw,28px);box-shadow:0 10px 30px rgba(13,58,74,.06)}
+.card h3{font-size:clamp(16px,2vw,24px);font-weight:900;color:var(--acc-deep);margin-bottom:.4em}
+.card.know{border-top:5px solid var(--acc)} .card.skill{border-top:5px solid var(--mint)}
+.card p,.card li{font-size:clamp(14px,1.7vw,20px);line-height:1.85}
+.card ul{list-style:none} .card li{padding-left:1.2em;position:relative;margin:.3em 0}
+.card li::before{content:"・";position:absolute;left:0;color:var(--acc)}
+.card.skill li::before{color:var(--mint)}
+
+.flow{display:flex;flex-direction:column;gap:clamp(6px,1.2vh,14px)}
+.step{display:flex;align-items:center;gap:clamp(10px,1.6vw,22px);background:#fff;
+  border:1px solid var(--line);border-left:6px solid var(--acc);border-radius:14px;
+  padding:clamp(10px,1.6vh,18px) clamp(14px,2vw,26px)}
+.step .n{font-size:clamp(15px,1.9vw,22px);font-weight:900;color:var(--acc);white-space:nowrap}
+.step .t{font-size:clamp(15px,1.9vw,22px);font-weight:700;line-height:1.6}
+.step .t small{display:block;font-weight:400;font-size:clamp(12px,1.4vw,16px);color:var(--sub);margin-top:2px}
+.arrow{align-self:center;color:var(--acc);font-size:clamp(14px,1.8vw,20px);font-weight:900;line-height:1}
+
+.big{font-size:clamp(24px,3.6vw,44px);font-weight:900;text-align:center;line-height:1.9;
+  letter-spacing:.05em;color:var(--acc-deep)}
+.dark .big{color:#fff}
+.big .hl{background:linear-gradient(transparent 62%,rgba(127,212,232,.55) 62%)}
+.dark .big .hl{background:linear-gradient(transparent 62%,rgba(7,151,185,.65) 62%)}
+
+table{width:100%;border-collapse:collapse;background:#fff;font-size:clamp(13px,1.6vw,19px)}
+th{background:var(--acc-pale);color:var(--acc-deep);font-weight:900;letter-spacing:.04em}
+th,td{border:1px solid var(--line);padding:clamp(6px,1vh,12px) clamp(10px,1.4vw,18px);
+  text-align:left;vertical-align:top;line-height:1.7}
+td b{color:var(--acc-deep)}
+
+.mock{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:6px;
+  background:#fff;border:2px solid var(--ink);border-radius:10px;padding:8px;height:100%;position:relative}
+.mock .cell{border:1.5px dashed #9db6c4;border-radius:8px;padding:8px 10px;
+  font-size:clamp(11px,1.3vw,15px);line-height:1.55;color:var(--sub)}
+.mock .cell b{color:var(--ink);display:block;font-size:clamp(12px,1.4vw,16px)}
+.mock .center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  background:var(--sand-pale);border:2px solid var(--sand);border-radius:12px;
+  padding:10px 16px;font-size:clamp(12px,1.4vw,16px);font-weight:900;color:var(--sand);
+  text-align:center;line-height:1.5;box-shadow:0 6px 18px rgba(0,0,0,.1)}
+.fusen{display:inline-block;border-radius:4px;padding:1px 8px;font-weight:900;font-size:.92em}
+.f1{background:#fff3b0;border:1px solid #e0c84a} .f2{background:#cdeffd;border:1px solid #6fc3e0}
+
+.foot{display:flex;justify-content:space-between;align-items:center;margin-top:clamp(8px,1.5vh,16px);
+  font-size:clamp(11px,1.3vw,14px);color:var(--sub);letter-spacing:.06em}
+.dark .foot{color:#8fb6c4}
+
+.nav{position:fixed;right:18px;bottom:14px;z-index:10;display:flex;gap:8px;align-items:center;
+  font-size:13px;color:#8fb6c4;user-select:none}
+.nav button{border:1px solid rgba(127,212,232,.5);background:rgba(12,35,48,.55);color:#d8eef5;
+  border-radius:8px;padding:6px 14px;font-size:15px;cursor:pointer;font-family:inherit}
+.nav button:hover{background:rgba(7,151,185,.5)}
+.counter{background:rgba(12,35,48,.55);border-radius:8px;padding:6px 12px}
+
+@media print{
+  body{overflow:visible;background:#fff}
+  .deck{width:auto;height:auto}
+  .slide{position:static;display:flex !important;height:100vh;page-break-after:always}
+  .nav{display:none}
+}
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- ============ スライド13 ============ -->
+<section class="slide dark active">
+  <div class="tag"><span class="no">スライド 13</span><span class="tm">12:30｜ワーク2 導入</span></div>
+  <div class="grow">
+    <p class="lead" style="letter-spacing:.2em;font-weight:700">ワーク2「示す」</p>
+    <h1>個人の効率化から、<br>組織の<span style="color:var(--ice)">資産化</span>へ。</h1>
+    <p class="lead" style="max-width:34em">AIを「使える」段階から、うまくいったやり方を「残して渡せる」段階へ。</p>
+    <div class="q">この春、異動した先生と一緒に<br>消えてしまった「仕事のやり方」はありませんか。</div>
+    <p class="lead">──隣の方と30秒、思い出してみてください。</p>
+  </div>
+  <div class="foot"><span>令和8年度 生成AIパイロット校 分科会（B区分 校務利用 中級）</span><span>スクールエージェント 田中善将</span></div>
+</section>
+
+<!-- ============ スライド13-2 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no">スライド 13</span><span class="tm">「示す」の意味</span></div>
+  <div class="grow">
+    <h2>「示す」＝ 発表することでは、ありません。</h2>
+    <div class="cols">
+      <div class="card" style="border-top:5px solid var(--coral)">
+        <h3 style="color:var(--coral)">✕ 報告して見せる</h3>
+        <p>報告書・スクリーンショット・成果発表。<br>「すごいですね」で終わり、<b>その人の異動と一緒に消える</b>。</p>
+      </div>
+      <div class="card" style="border-top:5px solid var(--acc)">
+        <h3>◯ 再現できる形で残す</h3>
+        <p>いつ・誰がその担当になっても、同じようにできる形にして渡す。<br><b>人が入れ替わっても、学校に残る</b>。</p>
+      </div>
+    </div>
+    <p class="big" style="margin-top:clamp(14px,3vh,30px)">上手な人の<span class="hl">背中</span>は広められない。<br><span class="hl">言葉にした手順</span>は広められる。</p>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>13</span></div>
+</section>
+
+<!-- ============ スライド14 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no">スライド 14</span><span class="tm">ビジョン｜4段の循環</span></div>
+  <h2>ゴールの姿 —— 「AIが読める学校」</h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="step"><span class="n">①</span><span class="t">タスクの言語化<small>仕事を「知識（名詞）」と「スキルズ（動詞）」に分けて書き出す ＝ 今日の付箋</small></span></div>
+      <div class="arrow">▼</div>
+      <div class="step"><span class="n">②</span><span class="t">ポートフォリオ化<small>付箋を2つのファイル（knowledge / skills）に起こし、様式・プロンプトと一緒に共有ドライブへ</small></span></div>
+      <div class="arrow">▼</div>
+      <div class="step"><span class="n">③</span><span class="t">データの循環<small>入力はフォームで取り、出力はドライブに残す ── 仕事をするたびに、資産が増える</small></span></div>
+      <div class="arrow">▼</div>
+      <div class="step"><span class="n">④</span><span class="t">AIが読める組織<small>2つのファイルを読ませれば、どのAIも「新任の担当者」になる。常設すればエージェント（Gem等）に</small></span></div>
+    </div>
+    <p class="lead" style="margin-top:clamp(8px,1.5vh,16px)">④の気づきが①の言語化を更新する——ぐるぐる回るから「循環」。<b>いつ誰が担当になっても、仕事が回る学校へ。</b></p>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>14</span></div>
+</section>
+
+<!-- ============ スライド14-2 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no">スライド 14</span><span class="tm">今日のことば</span></div>
+  <h2>今日つかう「ことば」を、日常の言葉で。</h2>
+  <div class="grow">
+    <table>
+      <tr><th style="width:11em">ことば</th><th>日常の言葉でいうと</th></tr>
+      <tr><td><b>資産化</b></td><td>自分の工夫が、学校に残る<b>共有財産</b>に変わること。効率化（自分が速くなる）は異動で消えるが、資産は残る。</td></tr>
+      <tr><td><b>知識（ナレッジ）</b></td><td>そのタスクで「知っていなければならないこと」。様式・ルール・前例・判断のものさし。<b>名詞</b>で書ける。</td></tr>
+      <tr><td><b>スキルズ</b></td><td>そのタスクの「進め方」。何から始め、何を確認し、どうなったら完成か。<b>動詞</b>で書ける。渡せる形の手順書。</td></tr>
+      <tr><td><b>ポートフォリオ</b></td><td>言語化したものの「置き場所」。個人のメモ帳ではなく、<b>学校の本棚</b>（共有ドライブ）。</td></tr>
+      <tr><td><b>エージェント</b></td><td>知識とスキルズを読み込ませた「常設のAI担当者」。Geminiでは <b>Gem</b>、ChatGPTでは <b>GPTs</b>、Copilotでは <b>エージェント</b>。呼び名が違うだけで中身は同じ。</td></tr>
+      <tr><td><b>新任者テスト</b></td><td>「明日から担当になった人」のつもりで質問し、資料だけで答えられるか確かめる検品。人にやれば<b>引き継ぎテスト</b>、AIにやれば<b>試運転</b>。</td></tr>
+    </table>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>14</span></div>
+</section>
+
+<!-- ============ スライド15 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no coral">スライド 15</span><span class="tm">12:45｜デモ 10分</span></div>
+  <h2>デモ：付箋2列が「新任者AI」になるまで</h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="step" style="border-left-color:var(--coral)"><span class="n" style="color:var(--coral)">1</span><span class="t">手書きの付箋を、2つのファイルに起こす<small>knowledge.md（知識＝名詞）／ skills.md（スキルズ＝動詞）。メモ帳で開ける、ただの文章ファイル</small></span></div>
+      <div class="arrow" style="color:var(--coral)">▼</div>
+      <div class="step" style="border-left-color:var(--coral)"><span class="n" style="color:var(--coral)">2</span><span class="t">AIにアップロードして、新任者テスト<small>「あなたはこのタスクを明日から担当する新任職員です。この2つのファイルだけを頼りに答えてください」</small></span></div>
+      <div class="arrow" style="color:var(--coral)">▼</div>
+      <div class="step" style="border-left-color:var(--coral)"><span class="n" style="color:var(--coral)">3</span><span class="t">別のAIでも、同じ2ファイルで同じ挙動<small>Gemini でも Copilot でも ChatGPT でも。環境が違っても、渡す部品は同じ</small></span></div>
+    </div>
+    <div class="cols" style="margin-top:clamp(10px,2vh,20px)">
+      <div class="card"><h3>新任者テストの質問 3つ</h3><ul><li>まず何をしますか？</li><li>完成条件は何ですか？</li><li>〇〇の場合はどうしますか？</li></ul></div>
+      <div class="card" style="border-top:5px solid var(--coral)"><h3 style="color:var(--coral)">注目してほしいのは…</h3><p><b>AIが答えに詰まる瞬間</b>。書いていないことは、AIも答えられない。<br>AIの賢さではなく、<b>言語化の質</b>がすべてを決める。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>15</span></div>
+</section>
+
+<!-- ============ スライド16-1 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no mint">スライド 16</span><span class="tm">12:55｜ワーク2-1 個人 25分</span></div>
+  <h2>ワーク2-1〈言語化する〉自分の仕事を、名詞と動詞に分ける</h2>
+  <div class="grow">
+    <div class="cols" style="grid-template-columns:1.15fr 1fr;flex:1;min-height:0">
+      <div style="display:flex;flex-direction:column;min-height:0">
+        <div class="mock" style="flex:1">
+          <div class="cell"><b>Aさんの区画</b>上：タスクの名刺（直書き）<br>左：<span class="fusen f1">知識</span> 名詞で1枚1項目<br>右：<span class="fusen f2">スキルズ</span> 動詞で番号順<br>下：データ（入力→出力）</div>
+          <div class="cell"><b>Bさんの区画</b>（同じ構成）</div>
+          <div class="cell"><b>Cさんの区画</b>（同じ構成）</div>
+          <div class="cell"><b>Dさんの区画</b>（同じ構成）</div>
+          <div class="center">中央スペース<br><small style="font-weight:400">あとで設計図を描く</small></div>
+        </div>
+        <p class="lead" style="font-size:clamp(12px,1.4vw,16px);margin-top:6px">模造紙を十字に区切る（1人1区画）。マーカーで区画線から。</p>
+      </div>
+      <div class="flow">
+        <div class="step" style="border-left-color:var(--mint)"><span class="n" style="color:var(--mint)">1</span><span class="t">タスクを1つ選ぶ<small>ワーク1の自分の付箋から。毎週・毎月・毎年やっていて、いつか引き継ぐ仕事</small></span></div>
+        <div class="step" style="border-left-color:var(--mint)"><span class="n" style="color:var(--mint)">2</span><span class="t"><span class="fusen f1">知識</span>＝知っていること<small>様式・ルール・前例・判断基準・関係者・暦（名詞で）</small></span></div>
+        <div class="step" style="border-left-color:var(--mint)"><span class="n" style="color:var(--mint)">3</span><span class="t"><span class="fusen f2">スキルズ</span>＝やっていること<small>手順を番号で。判断が分かれる所・失敗しがちな所は角を折る（動詞で）</small></span></div>
+        <div class="step" style="border-left-color:var(--mint)"><span class="n" style="color:var(--mint)">4</span><span class="t">付箋に ○ × △ をマーク<small>○AIに渡せる ／ ×渡せない（個人情報）／ △匿名化すれば渡せる</small></span></div>
+      </div>
+    </div>
+    <p class="big" style="font-size:clamp(17px,2.4vw,28px);margin-top:8px">書けない箇所こそ、収穫。そこが「暗黙知」の在り処です。<span class="hl">固有名詞は書かない</span>（役職名・匿名番号で）。</p>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>16</span></div>
+</section>
+
+<!-- ============ スライド16-2 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no mint">スライド 16</span><span class="tm">13:20｜ワーク2-2 ペア 18分</span></div>
+  <h2>ワーク2-2〈渡してみる〉引き継ぎテスト</h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="step" style="border-left-color:var(--mint)"><span class="n" style="color:var(--mint)">1</span><span class="t">ペアになり、相手の区画に向き合う</span></div>
+      <div class="step" style="border-left-color:var(--mint)"><span class="n" style="color:var(--mint)">2</span><span class="t">「明日からこの担当になった新任者」になりきって、付箋だけを頼りに仕事を再現<small>前半8分 → 交代して後半8分</small></span></div>
+      <div class="step" style="border-left-color:var(--mint)"><span class="n" style="color:var(--mint)">3</span><span class="t">詰まったら 🔴 印。本人は口頭で補足し、その内容を<b>新しい付箋にして貼り足す</b><small>口で説明できた＝まだ紙に書けていなかった、ということ</small></span></div>
+    </div>
+    <div class="cols" style="margin-top:clamp(10px,2vh,20px)">
+      <div class="card"><h3>新任者の質問例</h3><p style="font-size:clamp(17px,2.2vw,26px);font-weight:900;line-height:2">どこに？　誰に？<br>いつまでに？　例外は？</p></div>
+      <div class="card" style="border-top:5px solid var(--coral)"><h3 style="color:var(--coral)">🔴 は、ダメ出しではありません</h3><p>🔴が多い区画ほど、今日の収穫が大きい区画。<br><b>異動の3月ではなく、今日、穴が見つかった</b>のだから。</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>16</span></div>
+</section>
+
+<!-- ============ スライド16-3 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no sand">スライド 16</span><span class="tm">13:38｜試運転タイム 8分（任意・個人回線）</span></div>
+  <h2>試運転：自分の付箋を、AIの「新任者」にしてみる</h2>
+  <div class="grow">
+    <div class="flow">
+      <div class="step" style="border-left-color:var(--sand)"><span class="n" style="color:var(--sand)">1</span><span class="t">自分の区画をスマホで撮影<small>固有名詞がないことを確認してから。回線は個人のスマホ回線で（会場回線は使えません）</small></span></div>
+      <div class="step" style="border-left-color:var(--sand)"><span class="n" style="color:var(--sand)">2</span><span class="t">いつものAIに写真をアップロード<small>「この付箋を knowledge（知識）と skills（スキルズ・手順）の2つのファイルに書き起こして」</small></span></div>
+      <div class="step" style="border-left-color:var(--sand)"><span class="n" style="color:var(--sand)">3</span><span class="t">新任者テスト<small>「あなたは明日からこのタスクを担当する新任職員です。①まず何をしますか？ ②完成条件は？ ③〇〇の場合は？」</small></span></div>
+      <div class="step" style="border-left-color:var(--sand)"><span class="n" style="color:var(--sand)">4</span><span class="t">AIが詰まった質問 ＝ 模造紙の穴。付箋を1枚書き足す</span></div>
+    </div>
+    <p class="lead" style="margin-top:clamp(8px,1.5vh,16px)">回線がない方は、島のどなたかの画面を囲んでください。やらなくても<b>手順カード（配布）で持ち帰り後に同じことができます</b>。</p>
+    <p class="big" style="font-size:clamp(18px,2.6vw,32px)">付箋の質が、そのまま<span class="hl">AIの質</span>になる。</p>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>16</span></div>
+</section>
+
+<!-- ============ スライド16-4 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no mint">スライド 16</span><span class="tm">13:46｜ワーク2-3 グループ 14分</span></div>
+  <h2>ワーク2-3〈設計する〉資産化の設計図</h2>
+  <div class="grow">
+    <p class="lead">グループで1タスクを選び（効果 × 実現しやすさ）、模造紙の<b>中央スペース</b>に循環図を描く。</p>
+    <table style="margin-top:clamp(6px,1vh,12px)">
+      <tr><th style="width:9em">設計の4項目</th><th>考えること</th></tr>
+      <tr><td><b>置き場所</b></td><td>knowledge／skills・様式・プロンプトを共有ドライブの<b>どこ</b>に置くか（個人のマイドライブは不可）</td></tr>
+      <tr><td><b>循環</b></td><td>入力をフォーム・ドライブ経由にできるか。出力はどこに貯まるか。<b>仕事をするたびに資産が増える</b>形か</td></tr>
+      <tr><td><b>AIの読ませ方</b></td><td>knowledgeに入れるもの／skillsに書くこと／常設するならエージェントの名前</td></tr>
+      <tr><td><b>守りの線</b></td><td>個人情報の線をどこに引くか。<b>作った人が異動した後、誰が守るか</b></td></tr>
+    </table>
+    <p class="lead" style="margin-top:clamp(8px,1.5vh,14px)">最後に各自：<b>「自校で最初に資産化する1タスク」＋今週やる最初の一歩</b>を付箋1枚に書いて中央外周へ。30秒ずつ宣言。<br>最初の一歩は「付箋を2ファイルに起こしてドライブに置く」で十分です。</p>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>16</span></div>
+</section>
+
+<!-- ============ スライド16-5 ============ -->
+<section class="slide">
+  <div class="tag"><span class="no mint">スライド 16</span><span class="tm">14:00｜全体共有 10分</span></div>
+  <h2>全体共有 —— 2グループ、模造紙を掲げて3分ずつ</h2>
+  <div class="grow">
+    <div class="card" style="border-top:5px solid var(--acc)">
+      <h3>聞くときの3つの観点</h3>
+      <ul style="font-size:clamp(16px,2.2vw,26px);font-weight:700;line-height:2.1">
+        <li>循環になっているか（作って終わりの一方通行になっていないか）</li>
+        <li>個人情報の線は引けているか</li>
+        <li>「来年の担当」の視点が入っているか</li>
+      </ul>
+    </div>
+    <p class="lead" style="margin-top:clamp(8px,1.5vh,16px)">型は1つではありません。ただし、この3つの問いはどの学校でも共通です。</p>
+  </div>
+  <div class="foot"><span>ワーク2「示す」</span><span>16</span></div>
+</section>
+
+<!-- ============ スライド17 ============ -->
+<section class="slide dark">
+  <div class="tag"><span class="no">スライド 17</span><span class="tm">14:10｜まとめ</span></div>
+  <div class="grow">
+    <h2 style="color:#fff">今日、ここまで来ました。</h2>
+    <p class="lead">付箋1枚だった実践が —— 知識とスキルズに分かれ、引き継ぎテストを通り、AIが新任者として動き、置き場所と循環が決まった。<b style="color:#fff">これが「示す」＝水平展開の方略です。</b></p>
+    <div class="q">言語化の途中で、<br>AIに<b>渡せなかったもの</b>は何でしたか。</div>
+    <p class="lead">例外の子への判断。保護者との機微。地域の事情。最後の決定。——<b style="color:#fff">それこそが、教員として磨き続ける資質能力の正体</b>。この問いを持って、ワーク3「伸ばす」へ。</p>
+    <p class="big" style="margin-top:clamp(12px,2.5vh,26px)">残せる形が、渡せる形。<br><span class="hl">渡せないものが、あなたの仕事。</span></p>
+  </div>
+  <div class="foot"><span>ワーク2「示す」おわり —— 14:15から休憩、14:30よりワーク3へ</span><span>17</span></div>
+</section>
+
+</div>
+
+<div class="nav">
+  <button id="prev" title="前へ（←）">◀</button>
+  <span class="counter"><span id="cur">1</span> / <span id="total">–</span></span>
+  <button id="next" title="次へ（→ / クリック / スペース）">▶</button>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let i=0;
+document.getElementById('total').textContent=slides.length;
+function show(n){
+  i=Math.max(0,Math.min(slides.length-1,n));
+  slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+  document.getElementById('cur').textContent=i+1;
+}
+document.getElementById('next').onclick=e=>{e.stopPropagation();show(i+1)};
+document.getElementById('prev').onclick=e=>{e.stopPropagation();show(i-1)};
+document.addEventListener('keydown',e=>{
+  if(['ArrowRight','ArrowDown',' ','PageDown','Enter'].includes(e.key)){e.preventDefault();show(i+1)}
+  if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}
+  if(e.key==='Home')show(0); if(e.key==='End')show(slides.length-1);
+});
+document.getElementById('deck').addEventListener('click',()=>show(i+1));
+show(0);
+</script>
+</body>
+</html>
