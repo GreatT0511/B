@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ワーク2資料｜分科会B（校務利用 中級）</title>
+<style>
+:root{
+  --sky:#e8f7fc; --sky-deep:#0d9ec9; --sea:#0a7fa6; --ink:#123340;
+  --sub:#54707e; --line:#d3e9f1; --mint:#0eb489; --mint-pale:#e7f9f2;
+  --sun:#f5a623; --sun-pale:#fef4e2; --coral:#ef6a52; --coral-pale:#fdefec;
+  --white:#ffffff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;
+  font-feature-settings:"palt";color:var(--ink);line-height:1.85;
+  background:linear-gradient(180deg,#dff3fa 0%,#f2fafd 320px,#fbfeff 100%);
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px 90px}
+
+/* ---------- hero ---------- */
+header.hero{
+  position:relative;overflow:hidden;text-align:center;
+  padding:64px 20px 96px;
+  background:linear-gradient(160deg,#26b6e0 0%,#0d9ec9 55%,#0a7fa6 100%);
+  color:#fff;
+}
+.hero .kicker{
+  display:inline-block;font-size:13px;font-weight:800;letter-spacing:.22em;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.45);
+  border-radius:999px;padding:6px 22px;margin-bottom:18px;
+}
+.hero h1{font-size:clamp(26px,5.4vw,44px);font-weight:900;letter-spacing:.04em;line-height:1.5}
+.hero p.sub{margin-top:12px;font-size:clamp(13px,2.2vw,16px);font-weight:700;color:#d9f4fc;letter-spacing:.1em}
+.hero .sun{
+  position:absolute;top:-70px;right:-70px;width:220px;height:220px;border-radius:50%;
+  background:radial-gradient(circle,#ffe9b8 0%,#ffd166 45%,rgba(255,209,102,0) 72%);
+  opacity:.85;pointer-events:none;
+}
+.hero svg.wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:56px;display:block}
+
+/* ---------- toc ---------- */
+nav.toc{
+  margin:-44px auto 48px;max-width:880px;position:relative;z-index:2;
+  background:var(--white);border:1px solid var(--line);border-radius:18px;
+  box-shadow:0 14px 40px rgba(10,127,166,.12);
+  padding:18px 24px;display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:center;
+}
+nav.toc a{
+  font-size:14px;font-weight:800;color:var(--sea);text-decoration:none;
+  padding:6px 14px;border-radius:999px;background:var(--sky);transition:.15s;
+}
+nav.toc a:hover{background:var(--sky-deep);color:#fff}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px}
+.sec-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.sec-head .num{
+  flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  background:var(--sky-deep);color:#fff;font-weight:900;font-size:18px;
+  box-shadow:0 6px 16px rgba(13,158,201,.35);
+}
+.sec-head .num.mint{background:var(--mint);box-shadow:0 6px 16px rgba(14,180,137,.35)}
+.sec-head .num.sun{background:var(--sun);box-shadow:0 6px 16px rgba(245,166,35,.35)}
+.sec-head h2{font-size:clamp(20px,3.4vw,27px);font-weight:900;letter-spacing:.03em}
+
+.card{
+  background:var(--white);border:1px solid var(--line);border-radius:18px;
+  padding:26px 28px;box-shadow:0 8px 26px rgba(10,127,166,.07);margin-bottom:20px;
+}
+.card h3{font-size:17px;font-weight:900;color:var(--sea);margin-bottom:12px;letter-spacing:.02em}
+
+/* gem link button */
+a.gem{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,#26b6e0,#0a7fa6);color:#fff;text-decoration:none;
+  font-weight:900;font-size:15px;letter-spacing:.04em;
+  padding:13px 26px;border-radius:999px;
+  box-shadow:0 8px 20px rgba(13,158,201,.35);transition:.15s;
+}
+a.gem:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(13,158,201,.45)}
+a.gem.mint{background:linear-gradient(135deg,#1fc79b,#0a8f6c);box-shadow:0 8px 20px rgba(14,180,137,.35)}
+a.gem.mint:hover{box-shadow:0 12px 26px rgba(14,180,137,.45)}
+
+/* steps */
+ol.steps{list-style:none;counter-reset:st}
+ol.steps li{
+  counter-increment:st;position:relative;padding:12px 0 12px 52px;
+  border-bottom:1px dashed var(--line);font-size:15px;
+}
+ol.steps li:last-child{border-bottom:none}
+ol.steps li::before{
+  content:counter(st);position:absolute;left:6px;top:14px;
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--sky);color:var(--sea);font-weight:900;font-size:14px;
+}
+ol.steps li b{color:var(--sea)}
+.punch{
+  margin-top:14px;background:var(--mint-pale);border-left:5px solid var(--mint);
+  border-radius:0 12px 12px 0;padding:12px 18px;font-weight:800;font-size:15px;color:#0a6e54;
+}
+
+/* copy blocks */
+.copybox{position:relative;margin-top:10px}
+.copybox pre{
+  background:#f4fafc;border:1px solid var(--line);border-radius:14px;
+  padding:20px 22px;font-size:13.5px;line-height:1.9;overflow-x:auto;
+  white-space:pre-wrap;word-break:break-word;
+  font-family:"Hiragino Kaku Gothic ProN","Noto Sans JP",Meiryo,sans-serif;
+}
+.copybox pre.short{font-size:14.5px;font-weight:700}
+button.copy{
+  position:absolute;top:12px;right:12px;
+  background:var(--sky-deep);color:#fff;border:none;border-radius:999px;
+  font-size:12.5px;font-weight:900;letter-spacing:.06em;padding:7px 16px;cursor:pointer;
+  box-shadow:0 4px 12px rgba(13,158,201,.3);transition:.15s;
+}
+button.copy:hover{background:var(--sea)}
+button.copy.done{background:var(--mint)}
+
+/* callout */
+.warn{
+  background:var(--coral-pale);border:1px solid #f6c4b9;border-radius:16px;
+  padding:18px 22px 18px 56px;position:relative;font-size:14.5px;font-weight:700;color:#a33a26;
+}
+.warn::before{content:"⚠";position:absolute;left:20px;top:16px;font-size:22px}
+
+/* table */
+.tblwrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:#fff}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+thead th{
+  background:var(--sky-deep);color:#fff;font-weight:900;letter-spacing:.05em;
+  padding:12px 14px;text-align:left;white-space:nowrap;
+}
+tbody td{padding:12px 14px;border-top:1px solid var(--line);vertical-align:top;line-height:1.75}
+tbody tr:nth-child(even){background:#f6fbfd}
+td.q{font-weight:800;color:var(--sea);white-space:nowrap}
+@media(max-width:640px){td.q{white-space:normal}}
+
+/* doc links */
+ul.docs{list-style:none;display:grid;gap:12px}
+ul.docs a{
+  display:flex;align-items:center;gap:12px;text-decoration:none;
+  background:#fff;border:1px solid var(--line);border-radius:14px;
+  padding:14px 18px;font-weight:800;font-size:15px;color:var(--ink);transition:.15s;
+}
+ul.docs a:hover{border-color:var(--sky-deep);box-shadow:0 8px 20px rgba(13,158,201,.15);transform:translateY(-1px)}
+ul.docs a .ic{
+  flex:none;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+  background:var(--sun-pale);font-size:17px;
+}
+ul.docs a .arr{margin-left:auto;color:var(--sky-deep);font-weight:900}
+
+footer{
+  text-align:center;padding:34px 20px 44px;font-size:12.5px;color:var(--sub);
+  border-top:1px solid var(--line);background:#f2fafd;letter-spacing:.06em;
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="sun"></div>
+  <span class="kicker">R8 生成AIパイロット校 分科会</span>
+  <h1>ワーク2資料</h1>
+  <p class="sub">B区分（校務利用 中級）｜「示す」— ドキュメントを書き換えれば、Gemの担当者も育つ</p>
+  <svg class="wave" viewBox="0 0 1440 56" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,32 C240,64 480,0 720,20 C960,40 1200,8 1440,28 L1440,56 L0,56 Z" fill="#dff3fa"/>
+  </svg>
+</header>
+
+<nav class="toc">
+  <a href="#demo">① 冒頭デモ</a>
+  <a href="#qa">② テスト用想定問答</a>
+  <a href="#prompt">③ デモ用Gemのカスタム指示</a>
+  <a href="#materials">④ 「知識」アップ資料</a>
+  <a href="#work22">⑤ ワーク2-2 試運転</a>
+</nav>
+
+<div class="wrap">
+
+<!-- ① 冒頭デモ -->
+<section id="demo">
+  <div class="sec-head"><span class="num">①</span><h2>ワーク2 冒頭デモ</h2></div>
+
+  <div class="card">
+    <h3>デモで使うGem</h3>
+    <a class="gem" href="https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fgemini.google.com%2Fgem%2F1PK-L1KVmm3W0unxhzfZZ8i0li4dOEtWf%3Fusp%3Dsharing" target="_blank" rel="noopener">🤖 新任者AI（避難訓練担当）Gem を開く</a>
+  </div>
+
+  <div class="card">
+    <h3>デモでの動かし方</h3>
+    <ol class="steps">
+      <li>「<b>まず何をしますか?</b>」→ skills の手順1から答える<b>（答えられる）</b></li>
+      <li>「<b>完成条件は何ですか?</b>」→ knowledge の完了基準から答える<b>（答えられる）</b></li>
+      <li>「<b>雨天の場合はどうしますか?</b>」→ 資料に書いていないので詰まる<br>（デモ素材はわざと雨天判断を抜いてある）</li>
+      <li>その場で <a href="https://docs.google.com/document/d/1zv-C1GCZV3mSeN3L-bs61DM51GMJm3KlUiAnwRobzos/edit?usp=sharing" target="_blank" rel="noopener">knowledge_避難訓練</a> のGoogleドキュメントに雨天時の判断基準を1行追記 → Gemの「新しいチャット」を開いて同じ質問をもう一度 → 今度は答えられる</li>
+    </ol>
+    <div class="punch">＝「ドキュメントを書き換えれば、Gemの担当者も育つ」（4段の循環の④→①）を1分で見せる</div>
+  </div>
+
+  <div class="card">
+    <h3>「判断のものさし」に追記する1行</h3>
+    <div class="copybox">
+      <button class="copy" data-target="txt-amend">コピー</button>
+      <pre class="short" id="txt-amend">- 雨天・荒天時: 校庭への避難を体育館集合に切り替える。切り替えの判断は当日朝に教頭が行い、職員朝会で全職員に周知する。</pre>
+    </div>
+  </div>
+
+  <div class="warn">
+    「知識」にアップしているドキュメントは最新の状態に反映されるまで時間がかかるため、Gemの編集画面から該当のファイルを<b>一度削除してから、再度アップ</b>した方がいいです。
+  </div>
+</section>
+
+<!-- ② 想定問答 -->
+<section id="qa">
+  <div class="sec-head"><span class="num sun">②</span><h2>テスト用想定問答</h2></div>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>質問</th><th>AIの想定挙動</th><th>解説に使えるポイント</th></tr></thead>
+      <tbody>
+        <tr><td class="q">まず何をしますか?</td><td>skills 手順1</td><td>動詞の列が効く</td></tr>
+        <tr><td class="q">完成条件は?</td><td>knowledge 完了の基準</td><td>「終わった」の定義が引き継ぎの肝</td></tr>
+        <tr><td class="q">雨の日は?</td><td>詰まる（仕込み）</td><td>穴＝暗黙知の在り処</td></tr>
+        <tr><td class="q">消防署にはいつ連絡?</td><td>skills 手順3（1か月前）</td><td>暦・締切は忘れやすい知識</td></tr>
+        <tr><td class="q">予告なし訓練は誰に知らせる?</td><td>knowledge 判断のものさし</td><td>「誰に言わない」も知識になる</td></tr>
+        <tr><td class="q">実施要項のたたき台を作って</td><td>様式に沿った下書き。目的・想定・記録欄は資料から埋まり、実施日時・今年度の経路は【未記載: 質問】で返る</td><td>質問応答だけでなく成果物も作れる。ただし書いてないことは埋められない</td></tr>
+        <tr><td class="q">今日は何をすればいい?</td><td>「どの手順まで終わっていますか? いまの時期は?」と現在地を聞き返してから、次の一歩＋使う様式・締切を示す</td><td>新任者が実際に仕事を回せる「伴走」の動き。常設運用の姿がこれ</td></tr>
+        <tr><td class="q">やることチェックリストを作って</td><td>skillsの手順から、締切付き（消防署連絡＝実施日の1か月前 等）のリストが出る。根拠のない期限は【未記載】</td><td>逆算も「資料に書いてあるから」できる。暦・締切を書く価値</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ③ カスタム指示 -->
+<section id="prompt">
+  <div class="sec-head"><span class="num">③</span><h2>デモ用Gemのカスタム指示</h2></div>
+  <div class="card">
+    <div class="copybox">
+      <button class="copy" data-target="txt-gem1">コピー</button>
+      <pre id="txt-gem1">あなたは、このタスクを明日から担当することになった新任職員です。
+
+# 頼れるもの
+このGemの「知識」に登録された knowledge(知識)と skills(手順)の2つの資料だけです。
+前任者はすでに異動しており、直接質問することはできません。
+
+# 守ること
+1. 回答の根拠は、知識に登録された資料の記載のみとする。あなた自身の一般知識や、世間一般の学校の慣例で補完しない。
+2. 資料に書かれていないことを聞かれたら、推測で答えず、次の形式で正直に返す。
+   「その内容は資料に書かれていません。前任の方に確認が必要です:(確認したい質問を箇条書き)」
+3. 回答の末尾に、根拠にした資料名(knowledge / skills)と該当する見出しを添える。
+4. 手順を聞かれたら、skills の番号順に沿って答える。順番を入れ替えない。
+5. 資料の中に個人名・児童生徒名らしき記載を見つけたら、回答には使わず、「資料に個人情報の可能性がある記載があります」と指摘する。
+6. 「実施要項を作って」「周知文のたたき台を」など成果物の作成を頼まれたら、知識にある様式の項目立てに沿って下書きを作る。
+   - 埋められる項目は、knowledge / skills の記載だけを根拠に埋める。
+   - 資料に根拠がない項目は、もっともらしい仮の値で埋めず、空欄のまま「【未記載: (確認したい質問)】」を入れる。
+   - 冒頭に「これはたたき台です。【未記載】が n 件あります」と明示し、完成品のふりをしない。
+   - 児童生徒名・個人名の欄は、頼まれても埋めない。
+7. 「今日は何をすればいい?」「次は何?」のように進め方を聞かれたら、いきなり全手順を説明せず、まず現在地(どの手順まで終わっているか・いまの時期)を1〜2問で確認する。そのうえで skills の該当手順を「次の一歩」として示し、その手順で使う様式・関係者・締切(knowledge にあるもの)を添える。
+8. 頼まれたら、skills から「やることチェックリスト」を作る。締切があるものは資料の記載(例: 実施日の1か月前)から逆算した時期を付ける。時期や期限の根拠が資料にないものは、勝手に決めず【未記載】とする。
+9. どんな回答でも、最後に「人に確認・相談が必要なこと」があれば箇条書きで添える(資料に「教頭と相談」等とある箇所、【未記載】の箇所)。
+
+# ふるまい
+丁寧で前向きに、担当者がこのタスクを最後まで完走できるよう伴走する。
+わからないことを恥じず、「わからない」を確認事項のリストに変えることを自分の仕事だと考えている。</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 資料 -->
+<section id="materials">
+  <div class="sec-head"><span class="num sun">④</span><h2>「知識」アップ資料</h2></div>
+  <ul class="docs">
+    <li><a href="https://docs.google.com/document/d/1zv-C1GCZV3mSeN3L-bs61DM51GMJm3KlUiAnwRobzos/edit?usp=sharing" target="_blank" rel="noopener"><span class="ic">📘</span>knowledge_避難訓練<span class="arr">→</span></a></li>
+    <li><a href="https://docs.google.com/document/d/1TVmniQlFtMJOKl-U4NFBRngoLojqiLyEauzSxXHMUKs/edit?usp=sharing" target="_blank" rel="noopener"><span class="ic">📗</span>skills_避難訓練<span class="arr">→</span></a></li>
+    <li><a href="https://docs.google.com/document/d/1DAZkLv3YFHWVyymb51uHhyd9Y0UvHtbNRMHKMi2Rh4M/edit?usp=sharing" target="_blank" rel="noopener"><span class="ic">📄</span>様式_避難訓練実施要項<span class="arr">→</span></a></li>
+  </ul>
+</section>
+
+<!-- ⑤ ワーク2-2 -->
+<section id="work22">
+  <div class="sec-head"><span class="num mint">⑤</span><h2>ワーク2-2 試運転</h2></div>
+
+  <div class="card">
+    <h3>試運転で使うGem</h3>
+    <a class="gem mint" href="https://accounts.google.com/AccountChooser?continue=https%3A%2F%2Fgemini.google.com%2Fgem%2F1lNbg0hcFY8RcD9zXQTxcz473Itjrzau4%3Fusp%3Dsharing" target="_blank" rel="noopener">📝 付箋言語化コーチGem を開く</a>
+  </div>
+
+  <div class="card">
+    <h3>Gemのカスタム指示</h3>
+    <div class="copybox">
+      <button class="copy" data-target="txt-gem2">コピー</button>
+      <pre id="txt-gem2">あなたは、学校の先生が書いた手書きの付箋やメモを、業務の引き継ぎ資料に書き起こす専門のコーチです。
+
+# 仕事
+渡された写真・メモを、次の2つのファイルに整理して書き起こす。
+- knowledge(知識): そのタスクで知っていなければならないこと。様式・ルール・前例・判断基準・関係者・年間の時期。名詞で書けるもの。
+- skills(スキルズ): そのタスクの進め方。何から始め、何を確認し、どうなったら完成か。動詞で書けるもの。番号付きの手順にする。
+
+# 絶対に守ること
+1. 付箋・メモに書かれていないことを、あなたの想像で補って書かない。一般的な学校ではこうだろう、という補完も禁止。
+2. 手順として不完全な箇所・判断基準が書かれていない箇所は、埋めずに「【穴】ここが書かれていません: (確認すべき質問)」と明示する。穴を見つけることが、この書き起こしの最大の成果である。
+3. 個人名・児童生徒名・特定の保護者を指す記載を見つけたら、そのまま転記せず「役職名」や「対象者A」に置き換えた上で、「⚠個人情報を置き換えました」とreport する。
+4. 書き起こしの最後に、新任者テストの質問を3つ提案する。
+   (まず何をしますか? / 完成条件は何ですか? / ○○の場合はどうしますか?)
+
+# 出力形式
+次の順で、どちらのファイルかが一目でわかるように出す。
+1. 「■ knowledge(知識)― 貼り先: Googleドキュメント『knowledge_タスク名』」というラベル行を書き、その直後のコードブロックに knowledge の本文を出す。
+2. 「■ skills(スキルズ)― 貼り先: Googleドキュメント『skills_タスク名』」というラベル行を書き、その直後のコードブロックに skills の本文を出す。
+各コードブロックの1行目は「# タスク名 ― 知識(knowledge)」「# タスク名 ― 手順(skills)」の見出しにし、ブロック単体で見てもどちらのファイルかわかるようにする。
+- 本文の見出しは「## 様式・ルール」のような Markdown 形式。
+- そのままコピーして Googleドキュメントに貼れる状態にする。</pre>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<footer>R8 生成AIパイロット校 分科会｜B区分（校務利用 中級）ワーク2資料</footer>
+
+<script>
+document.querySelectorAll('button.copy').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    var text = document.getElementById(btn.dataset.target).innerText;
+    navigator.clipboard.writeText(text).then(function(){
+      btn.textContent = '✓ コピーしました';
+      btn.classList.add('done');
+      setTimeout(function(){ btn.textContent = 'コピー'; btn.classList.remove('done'); }, 1800);
+    });
+  });
+});
+</script>
+
+</body>
+</html>
